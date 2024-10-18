@@ -2,6 +2,9 @@ name: Rust
 
 on: [push, pull_request]
 
+env:
+  YARN_CACHE_FOLDER: ./cache
+
 jobs:
   build_job:
     # The host should always be linux
@@ -20,6 +23,19 @@ jobs:
         env:
           YARN_CACHE_FOLDER: ./cache
 
+      - name: Check
+        run: |
+            apt update
+            apt install ninja-build curl build-essential git -y
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            source $HOME/.cargo/env
+            ./tools/run-qt5.14
+            ls -al
+
+      - name: Check
+        run: |
+            ./yarn install --ignore-scripts
+            ls -al
 
       - uses: uraimo/run-on-arch-action@v2
         name: Build artifact
