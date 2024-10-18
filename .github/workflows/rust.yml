@@ -29,7 +29,7 @@ jobs:
             --volume "${PWD}/artifacts:/artifacts"
 
           # The shell to run commands with in the container
-          shell: /bin/sh
+          shell: /bin/bash
 
           # Install some dependencies in the container. This speeds up builds if
           # you are also using githubToken. Any dependencies installed here will
@@ -39,7 +39,7 @@ jobs:
           # no secrets are present in the container state or logs.
           install: |
             apt update
-            apt install ninja-build -y
+            apt install ninja-build curl build-essential -y
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
             source $HOME/.cargo/env
             rustc --version
