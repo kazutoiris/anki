@@ -30,8 +30,14 @@ jobs:
           tags: test:latest
           platforms: linux/arm64
 
+      - name: Copy out directory from the image
+        run: |
+          docker create --name temp-container test:latest
+          docker cp temp-container:/data/out ./out
+          docker rm temp-container
+
       - name: Upload out directory
         uses: actions/upload-artifact@v3
         with:
           name: out-files
-          path: "${PWD}/artifacts/out"
+          path: "${PWD}/out"
