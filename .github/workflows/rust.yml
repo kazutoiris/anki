@@ -9,11 +9,6 @@ jobs:
     name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: 'ankitects/anki'
-          fetch-tags: '24.06.3'
-          submodules: true
       - uses: uraimo/run-on-arch-action@v2
         name: Build artifact
         id: build
@@ -32,8 +27,12 @@ jobs:
           # The shell to run commands with in the container
           shell: /bin/bash
 
+          env: | # YAML, but pipe character is necessary
+            RUST_BACKTRACE: 1
+
           # Produce a binary artifact and place it in the mounted volume
           run: |
+            git clone https://github.com/ankitects/anki -b 24.06.3 --recursive
             apt update
             apt install ninja-build curl build-essential git -y
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
