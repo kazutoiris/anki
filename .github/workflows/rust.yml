@@ -9,9 +9,8 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          repository: ankitects/anki
+        run: |
+            git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
       
       - name: Run install
         uses: borales/actions-yarn@v4
