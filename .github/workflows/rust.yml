@@ -52,6 +52,7 @@ jobs:
           env: | # YAML, but pipe character is necessary
             RUST_BACKTRACE: full
             YARN_CACHE_FOLDER: ./cache
+            OFFLINE_BUILD_YARN: 1
 
           # Produce a binary artifact and place it in the mounted volume
           run: |

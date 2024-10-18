@@ -18,8 +18,8 @@ pub struct YarnArgs {
 pub fn setup_yarn(args: YarnArgs) {
     link_node_modules();
 
-    if env::var("OFFLINE_BUILD").is_ok() {
-        println!("OFFLINE_BUILD is set");
+    if env::var("OFFLINE_BUILD_YARN").is_ok() {
+        println!("OFFLINE_BUILD_YARN is set");
         println!("Running yarn with '--offline' and '--ignore-scripts'.");
         run_command(
             Command::new(&args.yarn_bin)
