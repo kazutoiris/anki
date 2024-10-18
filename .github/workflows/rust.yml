@@ -39,7 +39,7 @@ jobs:
           shell: /bin/bash
 
           env: | # YAML, but pipe character is necessary
-            RUST_BACKTRACE: 1
+            RUST_BACKTRACE: full
             YARN_CACHE_FOLDER: ./cache
 
           # Produce a binary artifact and place it in the mounted volume
@@ -50,6 +50,9 @@ jobs:
             source $HOME/.cargo/env
             rustc --version
             cargo --version
+            git clone https://github.com/ankitects/anki anki -b 24.06.3 --recursive
+            mv cache anki/cache
+            cd anki
             ./tools/run-qt5.14
             cp ./out /artifacts/ -r
 
