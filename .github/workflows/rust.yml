@@ -69,8 +69,6 @@ jobs:
             source $HOME/.cargo/env
             rustc --version
             cargo --version
-            mv cache anki/cache
-            cd anki
             ./tools/run-qt5.14
             cp ./out /artifacts/ -r
 
