@@ -20,7 +20,7 @@ jobs:
       - name: Check
         run: |
             sudo apt update
-            sudo apt install ninja-build curl build-essential git -y
+            sudo apt install ninja-build curl build-essential rsync git -y
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
             source $HOME/.cargo/env
             ./tools/run-qt5.14
@@ -57,7 +57,7 @@ jobs:
           # Produce a binary artifact and place it in the mounted volume
           run: |
             apt update
-            apt install ninja-build curl build-essential git -y
+            apt install ninja-build curl build-essential git rsync -y
             git config --global --add safe.directory ${PWD}
             git rev-parse --short=8 HEAD
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
