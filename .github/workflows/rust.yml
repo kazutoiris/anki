@@ -15,8 +15,12 @@ jobs:
       - name: Checkout repository
         run: |
             git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
-            git rev-parse --short=8 HEAD
 
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+                Dockerfile
+          sparse-checkout-cone-mode: false
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
