@@ -17,6 +17,8 @@ jobs:
 
       - name: Set up Docker
         run: |
+          brew install docker
+          open /Applications/Docker.app
           docker pull debian:10
 
       - name: Run in Docker
