@@ -2,8 +2,6 @@ FROM debian:10
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
-RUN useradd -d /state -m -u 998 user
-
 RUN apt-get update && apt install --yes gnupg ca-certificates && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 32A37959C2FA5C3C99EFBC32A79206696452D198 \
     && echo "deb https://apt.buildkite.com/buildkite-agent stable main" > /etc/apt/sources.list.d/buildkite-agent.list \
@@ -49,12 +47,13 @@ RUN apt-get update && apt install --yes gnupg ca-certificates && \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . /data
+WORKDIR /data
 
 RUN git config --global --add safe.directory /data
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN source "$HOME/.cargo/env"
 
-WORKDIR /data
-RUN ./tools/install-n2
-RUN ./ninja pylib qt check
+RUN /data/tools/install-n2
+RUN /data/ninja pylib qt check
 
 ENTRYPOINT ["/bin/bash"]
