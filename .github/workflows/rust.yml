@@ -47,12 +47,11 @@ jobs:
           run: |
             apt update
             apt install ninja-build curl build-essential git -y
-            git rev-parse --short=8 HEAD || true
+            git config --global --add safe.directory ${PWD}
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
             source $HOME/.cargo/env
             rustc --version
             cargo --version
-            git clone https://github.com/ankitects/anki anki -b 24.06.3 --recursive
             mv cache anki/cache
             cd anki
             ./tools/run-qt5.14
