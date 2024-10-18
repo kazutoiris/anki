@@ -5,31 +5,57 @@ on: [push, pull_request]
 jobs:
   build_job:
     # The host should always be linux
-    runs-on: macos-latest
-    name: Build
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           repository: ankitects/anki
-          path: anki
+      
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install --ignore-scripts # will run `yarn install` command
+        env:
+          YARN_CACHE_FOLDER: ./cache
 
-      - name: Set up Docker
-        run: |
-          brew install docker
-          docker pull debian:10
 
-      - name: Run in Docker
-        run: |
-          docker run --rm -v ${{ github.workspace }}/anki:/app -w /app debian:10 bash -c "
-          apt-get update && \
-          apt-get install -y rustc cargo ninja-build && \
-          ./tools/run-qt5.15
-          "
+      - uses: uraimo/run-on-arch-action@v2
+        name: Build artifact
+        id: build
+        with:
+          arch: aarch64
+          distro: buster
 
-      - name: Upload Output
+          # Create an artifacts directory
+          setup: |
+            mkdir -p "${PWD}/artifacts"
+
+          # Mount the artifacts directory as /artifacts in the container
+          dockerRunArgs: |
+            --volume "${PWD}/artifacts:/artifacts"
+
+          # The shell to run commands with in the container
+          shell: /bin/bash
+
+          env: | # YAML, but pipe character is necessary
+            RUST_BACKTRACE: 1
+            YARN_CACHE_FOLDER: ./cache
+
+          # Produce a binary artifact and place it in the mounted volume
+          run: |
+            apt update
+            apt install ninja-build curl build-essential git -y
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            source $HOME/.cargo/env
+            rustc --version
+            cargo --version
+            ./run
+            cp ./out /artifacts/ -r
+
+      - name: Upload out directory
         uses: actions/upload-artifact@v3
         with:
-          name: out
-          path: anki/out
+          name: out-files
+          path: "${PWD}/artifacts/out"
