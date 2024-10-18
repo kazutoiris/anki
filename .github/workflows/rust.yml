@@ -17,56 +17,18 @@ jobs:
             git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
             git rev-parse --short=8 HEAD
 
-      - name: Check
-        run: |
-            sudo apt update
-            sudo apt install ninja-build curl build-essential rsync git -y
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-            source $HOME/.cargo/env
-            ./tools/run-qt5.14
-            ls -al
-
-      - name: Check
-        run: |
-            ./yarn install --ignore-scripts
-            ls -al
-
-      - uses: uraimo/run-on-arch-action@v2
-        name: Build artifact
-        id: build
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build and push
+        uses: docker/build-push-action@v2
         with:
-          arch: aarch64
-          distro: buster
-
-          # Create an artifacts directory
-          setup: |
-            mkdir -p "${PWD}/artifacts"
-
-          # Mount the artifacts directory as /artifacts in the container
-          dockerRunArgs: |
-            --volume "${PWD}/artifacts:/artifacts"
-
-          # The shell to run commands with in the container
-          shell: /bin/bash
-
-          env: | # YAML, but pipe character is necessary
-            RUST_BACKTRACE: full
-            YARN_CACHE_FOLDER: ./cache
-            OFFLINE_BUILD_YARN: 1
-
-          # Produce a binary artifact and place it in the mounted volume
-          run: |
-            apt update
-            apt install ninja-build curl build-essential git rsync -y
-            git config --global --add safe.directory ${PWD}
-            git rev-parse --short=8 HEAD
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-            source $HOME/.cargo/env
-            rustc --version
-            cargo --version
-            ./tools/install-n2
-            ./ninja pylib qt check
-            cp ./out /artifacts/ -r
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: test:latest
+          platforms: linux/arm64
 
       - name: Upload out directory
         uses: actions/upload-artifact@v3
