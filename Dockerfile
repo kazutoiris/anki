@@ -49,7 +49,8 @@ RUN apt-get update && apt install --yes gnupg ca-certificates && \
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH
+    PATH=/usr/local/cargo/bin:$PATH \
+    RUST_BACKTRACE=full
 
 RUN mkdir /data
 WORKDIR /data
