@@ -10,15 +10,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: 'ankitects/anki'
+          fetch-tags: '24.06.3'
+          submodules: true
       - uses: uraimo/run-on-arch-action@v2
         name: Build artifact
         id: build
         with:
           arch: aarch64
           distro: buster
-
-          # Not required, but speeds up builds
-          githubToken: ${{ github.token }}
 
           # Create an artifacts directory
           setup: |
@@ -31,22 +32,14 @@ jobs:
           # The shell to run commands with in the container
           shell: /bin/bash
 
-          # Install some dependencies in the container. This speeds up builds if
-          # you are also using githubToken. Any dependencies installed here will
-          # be part of the container image that gets cached, so subsequent
-          # builds don't have to re-install them. The image layer is cached
-          # publicly in your project's package repository, so it is vital that
-          # no secrets are present in the container state or logs.
-          install: |
+          # Produce a binary artifact and place it in the mounted volume
+          run: |
             apt update
             apt install ninja-build curl build-essential -y
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
             source $HOME/.cargo/env
             rustc --version
             cargo --version
-
-          # Produce a binary artifact and place it in the mounted volume
-          run: |
             ./run
 
       - name: Upload out directory
