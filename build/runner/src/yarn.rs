@@ -28,7 +28,7 @@ pub fn setup_yarn(args: YarnArgs) {
                 .arg("--ignore-scripts"),
         );
     } else {
-        run_command(Command::new(&args.yarn_bin).arg("install  --network-timeout 1000000000"));
+        run_command(Command::new(&args.yarn_bin).arg("install").arg("--network-timeout 1000000000"));
     }
 
     std::fs::write(args.stamp, b"").unwrap();
