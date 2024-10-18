@@ -64,7 +64,8 @@ jobs:
             source $HOME/.cargo/env
             rustc --version
             cargo --version
-            ./tools/run-qt5.14
+            ./tools/install-n2
+            ./ninja pylib qt check
             cp ./out /artifacts/ -r
 
       - name: Upload out directory
