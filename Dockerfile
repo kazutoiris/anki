@@ -43,6 +43,7 @@ RUN apt-get update && apt install --yes gnupg ca-certificates && \
     python3-dev \
     rsync \
     unzip \
+    ninja-build \
     zstd \
     && rm -rf /var/lib/apt/lists/*
 
@@ -55,6 +56,6 @@ WORKDIR /data
 RUN git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path  -y
 
-RUN /data/ninja pylib qt check
+RUN /data/ninja pylib qt
 
 ENTRYPOINT ["/bin/bash"]
