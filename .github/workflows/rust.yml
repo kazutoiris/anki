@@ -11,6 +11,7 @@ jobs:
       - name: Checkout repository
         run: |
             git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
+            git rev-parse --short=8 HEAD
       
       - name: Run install
         uses: borales/actions-yarn@v4
@@ -44,6 +45,7 @@ jobs:
 
           # Produce a binary artifact and place it in the mounted volume
           run: |
+            git rev-parse --short=8 HEAD || true
             apt update
             apt install ninja-build curl build-essential git -y
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
