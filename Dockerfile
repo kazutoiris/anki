@@ -53,7 +53,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 RUN mkdir /data
 WORKDIR /data
 RUN git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s --no-modify-path -- -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path  -y
 
 RUN /data/tools/install-n2
 RUN /data/ninja pylib qt check
