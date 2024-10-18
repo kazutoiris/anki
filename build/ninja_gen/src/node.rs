@@ -23,8 +23,8 @@ pub fn node_archive(platform: Platform) -> OnlineArchive {
             sha256: "822780369d0ea309e7d218e41debbd1a03f8cdf354ebf8a4420e89f39cc2e612",
         },
         Platform::LinuxArm => OnlineArchive {
-            url: "https://nodejs.org/dist/v20.11.0/node-v20.11.0-linux-arm64.tar.xz",
-            sha256: "f6df68c6793244071f69023a9b43a0cf0b13d65cbe86d55925c28e4134d9aafb",
+            url: "https://nodejs.org/dist/latest-v18.x/node-v18.20.4-linux-arm64.tar.xz",
+            sha256: "1cb5053bd4109aec41a8104ea3e9f48b95b1adef4d23bb4fc64f8c2d90c65ae3",
         },
         Platform::MacX64 => OnlineArchive {
             url: "https://nodejs.org/dist/v20.11.0/node-v20.11.0-darwin-x64.tar.xz",

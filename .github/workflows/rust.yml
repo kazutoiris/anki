@@ -12,10 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        run: |
-            git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
-
       - uses: actions/checkout@v4
         with:
           sparse-checkout: |
