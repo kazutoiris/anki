@@ -28,7 +28,7 @@ jobs:
           "
 
       - name: Upload Output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: out
           path: anki/out
