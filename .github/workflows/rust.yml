@@ -40,7 +40,7 @@ jobs:
             source $HOME/.cargo/env
             rustc --version
             cargo --version
-            ./run
+            ./tools/run-qt5.15
             cp ./out /artifacts/ -r
 
       - name: Upload out directory
