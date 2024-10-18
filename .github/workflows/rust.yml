@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 env:
   YARN_CACHE_FOLDER: ./cache
+  RUST_BACKTRACE: full
 
 jobs:
   build_job:
@@ -15,13 +16,6 @@ jobs:
         run: |
             git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
             git rev-parse --short=8 HEAD
-      
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install --ignore-scripts # will run `yarn install` command
-        env:
-          YARN_CACHE_FOLDER: ./cache
 
       - name: Check
         run: |
