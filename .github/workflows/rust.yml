@@ -32,9 +32,9 @@ jobs:
 
           # Produce a binary artifact and place it in the mounted volume
           run: |
-            git clone https://github.com/ankitects/anki -b 24.06.3 --recursive
             apt update
             apt install ninja-build curl build-essential git -y
+            git clone https://github.com/ankitects/anki -b 24.06.3 --recursive
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
             source $HOME/.cargo/env
             rustc --version
