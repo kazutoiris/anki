@@ -50,7 +50,7 @@ RUN mkdir /data
 WORKDIR /data
 RUN git clone https://github.com/ankitects/anki . -b 24.06.3 --recursive
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-RUN source "$HOME/.cargo/env"
+RUN /bin/bash -c "source $HOME/.cargo/env"
 
 RUN /data/tools/install-n2
 RUN /data/ninja pylib qt check
