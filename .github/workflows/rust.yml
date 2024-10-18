@@ -61,8 +61,8 @@ jobs:
 
           # Produce a binary artifact and place it in the mounted volume
           run: |
-            apt update
-            apt install ninja-build curl build-essential git -y
+            sudo apt update
+            sudo apt install ninja-build curl build-essential git -y
             git config --global --add safe.directory ${PWD}
             git rev-parse --short=8 HEAD
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
