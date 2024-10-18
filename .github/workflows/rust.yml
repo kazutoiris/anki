@@ -48,6 +48,7 @@ jobs:
             apt update
             apt install ninja-build curl build-essential git -y
             git config --global --add safe.directory ${PWD}
+            git rev-parse --short=8 HEAD
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
             source $HOME/.cargo/env
             rustc --version
