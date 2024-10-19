@@ -32,7 +32,7 @@ jobs:
 
       - name: Copy out directory from the image
         run: |
-          docker create --name temp-container test:latest
+          docker create --name temp-container --platform linux/arm64 test:latest
           docker cp temp-container:/data/out ./out
           docker rm temp-container
 
