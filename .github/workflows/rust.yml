@@ -26,7 +26,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: true
+          push: false
           tags: test:latest
           platforms: linux/arm64
 
