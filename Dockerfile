@@ -57,6 +57,6 @@ WORKDIR /data
 RUN git clone https://github.com/kazutoiris/anki . --recursive
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path  -y
 
-RUN /data/ninja pylib qt pyenv-qt5.14 wheels
+RUN /data/ninja pylib qt pyenv-qt5.15
 
 ENTRYPOINT ["/bin/bash"]
