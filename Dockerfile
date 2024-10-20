@@ -40,7 +40,6 @@ RUN apt-get update && apt install --yes gnupg ca-certificates && \
     make \
     pkg-config \
     portaudio19-dev \
-    python3-dev \
     rsync \
     unzip \
     ninja-build \
