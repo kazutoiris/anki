@@ -1,2 +1,10 @@
 pip-tools
 colorama # required on windows
+pyqt5==5.15.5
+pyqtwebengine==5.15.5
+pyqt5_sip==12.9.0
+pyqt6==6.6.1
+pyqt6-qt6==6.6.2
+pyqt6-webengine==6.6.0
+pyqt6-webengine-qt6==6.6.2
+pyqt6_sip==13.6.0
