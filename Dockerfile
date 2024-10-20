@@ -44,6 +44,7 @@ RUN apt-get update && apt install --yes gnupg ca-certificates && \
     unzip \
     ninja-build \
     zstd \
+    qt5-default \
     && rm -rf /var/lib/apt/lists/*
 
 ENV RUSTUP_HOME=/usr/local/rustup \
