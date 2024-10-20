@@ -44,7 +44,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/${{ github.actor }}/test:${{ github.run_number	}}
-          platforms: linux/arm64
 
   pull_docker_image:
     runs-on: ubuntu-latest
@@ -67,7 +66,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Pull Docker image
         run: |
-          container_id=$(docker create --platform linux/arm64 "ghcr.io/${{ github.actor }}/test:${{ github.run_number	}}")
+          container_id=$(docker create "ghcr.io/${{ github.actor }}/test:${{ github.run_number	}}")
           docker cp "$container_id:/data/out/wheels" "."
           docker rm "$container_id"
       - uses: actions/upload-artifact@v4
