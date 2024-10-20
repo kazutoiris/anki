@@ -28,8 +28,8 @@ pub fn python_archive(platform: Platform) -> OnlineArchive {
         }
         Platform::LinuxArm => {
             OnlineArchive {
-                url: "https://github.com/indygreg/python-build-standalone/releases/download/20240107/cpython-3.9.18+20240107-aarch64-unknown-linux-gnu-install_only.tar.gz",
-                sha256: "7d19e1ecd6e582423f7c74a0c67491eaa982ce9d5c5f35f0e4289f83127abcb8",
+                url: "https://github.com/indygreg/python-build-standalone/releases/download/20241016/cpython-3.10.15+20241016-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz",
+                sha256: "6008b42df79a0c8a4efe3aa88c2aea1471116aa66881a8ed15f04d66438cb7f5",
             }
         }
         Platform::MacX64 => {
