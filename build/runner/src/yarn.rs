@@ -17,7 +17,7 @@ pub struct YarnArgs {
 
 pub fn setup_yarn(args: YarnArgs) {
     link_node_modules();
-    run_command(Command::new(&args.yarn_bin).arg("config set network-timeout 60000000 -g"));
+    run_command(Command::new(&args.yarn_bin).arg("config").arg("set").arg("network-timeout").arg("60000000").arg("-g"));
 
     if env::var("OFFLINE_BUILD_YARN").is_ok() {
         println!("OFFLINE_BUILD_YARN is set");
@@ -29,7 +29,7 @@ pub fn setup_yarn(args: YarnArgs) {
                 .arg("--ignore-scripts"),
         );
     } else {
-        run_command(Command::new(&args.yarn_bin).arg("install"));
+        run_command(Command::new(&args.yarn_bin).arg("install").arg("--network-timeout").arg("6000000"));
     }
 
     std::fs::write(args.stamp, b"").unwrap();
