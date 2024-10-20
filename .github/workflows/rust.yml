@@ -33,12 +33,13 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: test:latest
+          tags: ghcr.io/${{ github.actor }}/test:${{ github.run_number	}}
+          # platforms: linux/arm64
           load: true
 
       - name: Copy out directory from the image
         run: |
-          docker create --name temp-container test:latest
+          docker create --name temp-container ghcr.io/${{ github.actor }}/test:${{ github.run_number	}}
           docker cp temp-container:/data/out ./out
           docker rm temp-container
 
