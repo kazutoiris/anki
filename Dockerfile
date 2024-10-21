@@ -51,7 +51,8 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
     RUST_BACKTRACE=full \
-    RELEASE=2
+    RELEASE=2 \
+    OUTPUT_SUCCESS=1
 
 RUN mkdir /data
 WORKDIR /data
@@ -59,6 +60,6 @@ RUN git clone https://github.com/kazutoiris/anki . --recursive
 RUN git submodule update --checkout qt/bundle/PyOxidizer
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path  -y
 
-RUN /data/ninja wheels
+RUN /data/ninja pylib
 
 ENTRYPOINT ["/bin/bash"]
