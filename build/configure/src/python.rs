@@ -200,7 +200,7 @@ fn add_pylint(build: &mut Build) -> Result<()> {
             target_folder: "pylint/anki",
             strip_prefix: "$builddir/pylib/anki",
             // avoid copying our large rsbridge binary
-            extra_args: "--links",
+            extra_args: "",
         },
     )?;
     build.add_action(

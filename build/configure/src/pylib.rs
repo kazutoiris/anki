@@ -5,7 +5,7 @@ use anyhow::Result;
 use ninja_gen::action::BuildAction;
 use ninja_gen::archives::Platform;
 use ninja_gen::command::RunCommand;
-use ninja_gen::copy::LinkFile;
+use ninja_gen::copy::CopyFile;
 use ninja_gen::glob;
 use ninja_gen::hashmap;
 use ninja_gen::inputs;
@@ -45,7 +45,7 @@ pub fn build_pylib(build: &mut Build) -> Result<()> {
     )?;
     build.add_action(
         "pylib:anki:rsbridge",
-        LinkFile {
+        CopyFile {
             input: inputs![":pylib:rsbridge"],
             output: &format!(
                 "pylib/anki/_rsbridge.{}",
