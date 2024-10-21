@@ -59,6 +59,6 @@ RUN git submodule update --checkout qt/bundle/PyOxidizer
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path  -y
 
 RUN /data/tools/install-n2
-RUN /data/ninja bundle -v
+RUN /data/ninja yarn -v
 
 ENTRYPOINT ["/bin/bash"]
