@@ -42,7 +42,6 @@ RUN apt-get update && apt install --yes gnupg ca-certificates && \
     portaudio19-dev \
     rsync \
     unzip \
-    ninja-build \
     zstd \
     qt5-default \
     && rm -rf /var/lib/apt/lists/*
@@ -59,6 +58,7 @@ RUN git clone https://github.com/kazutoiris/anki . --recursive
 RUN git submodule update --checkout qt/bundle/PyOxidizer
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path  -y
 
+RUN /data/tools/install-n2
 RUN /data/ninja bundle -v
 
 ENTRYPOINT ["/bin/bash"]
