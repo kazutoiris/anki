@@ -66,7 +66,7 @@ impl BuildAction for LinkFile<'_> {
         if cfg!(windows) {
             "cmd /c copy $in $out"
         } else {
-            "ln -sf $in $out"
+            "cp -fr $in $out"
         }
     }
 
